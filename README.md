@@ -6,6 +6,7 @@
 - Meteor
 - MongoDB
 - Styled-components
+- Cordova
 
 ## Consignes
 
@@ -29,3 +30,6 @@
 * modifier un salon lui appartenant
 * supprimer un salon lui appartenant
 
+## Pour les barbus qui en veulent
+
+* ajouter des notifications

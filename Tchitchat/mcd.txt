@@ -1,0 +1,4 @@
+
+user : username, email, password, gender, birthdate, city, created_at
+rooms: name, owner_id
+msg: user_id[], room_id, content, created_at

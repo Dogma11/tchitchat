@@ -36,7 +36,7 @@ const Connection = () => {
       />
       <button
         onClick={signin}
-      >Signup
+      >Signin
       </button>
       <Link to="/signup">Inscription</Link><br/><br/>
       <Link to="/forgotpass">Je suis une brêle</Link>

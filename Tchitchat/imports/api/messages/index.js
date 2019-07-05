@@ -9,6 +9,12 @@ const MessageSchema = new SimpleSchema({
     },
     room_id: {
         type: String
+    },
+    content: {
+        type: String,
+    },
+    created_ad: {
+        type: Date,
     }
 });
 

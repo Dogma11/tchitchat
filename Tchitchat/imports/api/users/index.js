@@ -11,16 +11,20 @@ const UserSchema = new SimpleSchema({
         type: String
     },
     gender: {
-        type: String
+        type: String,
+        optional: true,
     },
     birthdate: {
-        type: Date
+        type: Date,
+        optional: true,
     },
     city: {
-        type: String
+        type: String,
+        optional: true
     },
     created_at: {
-        type: Date
+        type: Date,
+        defaultValue: new Date,
     }
 });
 

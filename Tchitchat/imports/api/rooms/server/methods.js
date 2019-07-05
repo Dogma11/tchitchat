@@ -2,14 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import Rooms from '..';
 
 Meteor.methods({
-  "rooms.create"({ title, content }) {
+  "rooms.create"({ name, user_id }) {
     if (!this.userId) {
       throw new Meteor.Error('403', 'You must be connected');
     }
     
     Rooms.insert({
-      name,
-      owner_id = this.user_id
+      name: name,
+      owner_id: this.userId
     });
   },
 

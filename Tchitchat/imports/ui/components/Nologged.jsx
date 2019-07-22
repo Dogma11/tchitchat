@@ -2,6 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Route, Redirect } from 'react-router-dom';
+import Wrapper from './Wrapper';
 
 const Nologged = ({ path, component, userId }) => {
     if (userId) {
@@ -9,7 +10,11 @@ const Nologged = ({ path, component, userId }) => {
     }
     else 
     {
-        return <Route path={path} component={component} />
+        return (
+            <div>
+                <Wrapper path={path} component={component} />
+            </div>
+        )
     }
 };
 

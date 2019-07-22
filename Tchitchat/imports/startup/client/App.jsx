@@ -12,6 +12,8 @@ import Setting   from '/imports/ui/modules/Accounts/Setting';
 import Users     from '/imports/ui/modules/Users';
 import NotFound  from '/imports/ui/modules/Errors/NotFound';
 import Landing   from '/imports/ui/modules/Landing';
+import Wrapper   from '/imports/ui/components/Wrapper';
+
 
 const App = () => (
   <Router>
@@ -23,8 +25,8 @@ const App = () => (
       <Nologged path="/signup"              component={Signup}              />
       <Nologged path="/signin"              component={Signin}              /> 
       <Nologged path="/verify/:token"       component={Verify}       logged />
-      <Route    path="/"                    component={Landing}             />
-      <Route    path="*"                    component={NotFound}            />
+      <Wrapper    path="/"                    component={Landing}             />
+      <Wrapper    path="*"                    component={NotFound}            />
     </Switch>
   </Router>
 );

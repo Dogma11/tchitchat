@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Link } from 'react-router-dom';
 
 
-
-const Landing = ({ user }) => {
-    return (
+const Landing = () => {
+    return(
         <div>
-            <h1>FEED ME</h1>
+            <h1>LANDING</h1>
         </div>
     );
 };
 
-export default Landing
+export default Landing;

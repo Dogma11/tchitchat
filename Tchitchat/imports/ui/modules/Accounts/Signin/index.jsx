@@ -44,4 +44,6 @@ const Connection = () => {
   );
 }
 
-export default Connection;
+export default withTracker(() => ({
+  userId: Meteor.userId(),
+}))(Connection);

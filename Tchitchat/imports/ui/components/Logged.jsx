@@ -2,10 +2,15 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Route, Redirect } from 'react-router-dom';
+import Wrapper from './Wrapper';
 
 const Logged = ({ path, component, userId }) => {
     if (userId) {
-        return <Route path={path} component={component} />
+        return (
+            <div>
+                <Wrapper path={path} component={component} />
+            </div>
+        )
     }
     else
     {
@@ -14,5 +19,5 @@ const Logged = ({ path, component, userId }) => {
 };
 
 export default withTracker(() => ({
-    userId: Meteor.userId(),
+    userId: Meteor.userId()
 }))(Logged);

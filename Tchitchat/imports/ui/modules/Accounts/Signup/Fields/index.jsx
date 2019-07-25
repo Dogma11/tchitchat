@@ -3,7 +3,8 @@ import CustomInput from '/imports/ui/components/CustomInput';
 import fields from './array';
 
 const Fields = ({ update, state }) => {
-  return fields.map(field => (
+  return fields.map(field => {
+    return(
     <CustomInput
       type={field.type}
       key={field.name}
@@ -12,7 +13,7 @@ const Fields = ({ update, state }) => {
       placeholder={field.placeholder}
       name={field.name}
     />
-  ))
+  )})
 }
 
 export default Fields;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '/imports/utils/colors';
 
 const StyledSelect = styled.select`
-  font-size: 6em;
+  font-size: 2em;
   outline: none;
   border: none;
   border-bottom: 1px solid ${({ color }) => colors(color)};

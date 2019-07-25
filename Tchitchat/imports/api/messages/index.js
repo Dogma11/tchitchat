@@ -13,7 +13,7 @@ const MessageSchema = new SimpleSchema({
     content: {
         type: String,
     },
-    created_ad: {
+    created_at: {
         type: Date,
     }
 });

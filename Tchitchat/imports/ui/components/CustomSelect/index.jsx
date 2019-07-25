@@ -1,7 +1,7 @@
 import React from 'react';
 import StyledSelect from './StyledSelect';
 
-const CustomSelect = ({ update, options, ...rest }) => 
+const CustomSelect = ({ update, options, name, label, ...rest }) => 
 {
   const renderOptions = Array.isArray(options)
   ? options.map(option => (
@@ -11,6 +11,7 @@ const CustomSelect = ({ update, options, ...rest }) =>
 
   return (
     <div>
+      <label htmlFor={name}>{label}</label><br/>
       <StyledSelect
         onChange={(e) =>
           update(e, e.target || {})

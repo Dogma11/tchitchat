@@ -1,4 +1,8 @@
 body {
-  padding: 10px;
   font-family: sans-serif;
+  background-color: lightslategrey !important;
+}
+.mysidebar {
+  position: sticky !important;
+  min-height: -webkit-fill-available;
 }

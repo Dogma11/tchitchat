@@ -5,17 +5,18 @@ const Users = Meteor.users;
 
 const UserSchema = new SimpleSchema({
     username: {
-        type: [String],
+        type: String,
+        optional: false,
     },
-    email: {
-        type: String
+    password: {
+        type: String,
     },
     gender: {
         type: String,
         optional: true,
     },
-    birthdate: {
-        type: Date,
+    old: {
+        type: Number,
         optional: true,
     },
     city: {
@@ -27,7 +28,6 @@ const UserSchema = new SimpleSchema({
         defaultValue: new Date,
     }
 });
-
 
 Users.attachSchema(UserSchema)
 

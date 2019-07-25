@@ -6,10 +6,6 @@ import { Accounts } from 'meteor/accounts-base';
 
 global.cerr = (message, label = "DEVLOG") => (console.log(`[${label}]`, message), message);
 
-Accounts.config({
-  forbidClientAccountCreation: false 
-});
-
 Meteor.startup(() => {
   hydrate(<App />, document.getElementById('react-target'));
 });

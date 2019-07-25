@@ -2,14 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import Rooms from '..';
 
 Meteor.methods({
-  "rooms.create"({ name, user_id }) {
+  "rooms.create"({ name, owner_id }) {
     if (!this.userId) {
       throw new Meteor.Error('403', 'You must be connected');
     }
-    
     Rooms.insert({
-      name: name,
-      owner_id: this.userId
+      name,
+      owner_id
     });
   },
 
@@ -40,4 +39,11 @@ Meteor.methods({
 
     Rooms.remove(id);
   },
+  "rooms.findAll"({ owner_id }) {
+    if (!owner_id){
+      throw new Meteor.Error('403', 'You must be connected');
+    }
+    
+    return { rooms: Rooms.find({"owner_id": owner_id}).fetch() }
+  }
 });

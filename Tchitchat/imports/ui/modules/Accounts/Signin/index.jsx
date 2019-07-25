@@ -39,7 +39,7 @@ const Connection = () => {
       >Signin
       </button>
       <Link to="/signup">Inscription</Link><br/><br/>
-      <Link to="/forgotpass">Je suis une brêle</Link>
+      <Link to="/missing">Je suis une brêle</Link>
     </div>
   );
 }

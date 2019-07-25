@@ -8,10 +8,10 @@ Meteor.methods({
     }
     if (room_id) {
         Messages.insert({
-            user_id: [this.user_id],
+            user_id: user_id,
             room_id: room_id,
             content: content,
-            created_at: new Date
+            created_at: new Date()
         });
     }
     else
@@ -19,7 +19,7 @@ Meteor.methods({
         Messages.insert({
             user_id: user_id,
             content: content,
-            created_at: new Date
+            created_at: new Date()
         });
     }
   },

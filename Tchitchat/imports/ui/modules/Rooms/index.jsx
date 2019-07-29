@@ -8,7 +8,7 @@ import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import Loader from '/imports/ui/components/Loader';
 import ChatContent from '/imports/ui/components/ChatContent';
 
-const Room = ({ user, userId, match, theroom, myroom, roomid }) => {
+const Room = ({ userId, match, theroom, myroom, roomid }) => {
 
   const [ msg, setMsg ]= useState("");
 
@@ -17,6 +17,7 @@ const Room = ({ user, userId, match, theroom, myroom, roomid }) => {
       content: msg,
       user_id: [userId],
       room_id: roomid,
+      owner_id: Meteor.userId()
     })
     setMsg("");
   }
@@ -37,12 +38,12 @@ const Room = ({ user, userId, match, theroom, myroom, roomid }) => {
             <Header as='h3' dividing>
               {myroom.name}
             </Header>
-            <ChatContent roomid={roomid}/>
+            <ChatContent roomid={roomid} userids={[userId]}/>
           </Comment.Group>
 
           <Form className="row w-100">
             <Form.Input onChange={update} name="msg" value={msg} className="w-75" />
-            <Button className="w-25" content='Send' labelPosition='left' icon='send' primary onClick={send} />
+            <Button content='Send' labelPosition='left' icon='send' primary onClick={send} />
           </Form>
         </div>
         );
@@ -54,9 +55,10 @@ const Room = ({ user, userId, match, theroom, myroom, roomid }) => {
 export default withTracker((component) => {
   const roomid = component.match.params.id;
   const theroom = Meteor.subscribe('rooms.myroom', { id: roomid });
-  const myroom = Rooms.find(roomid).fetch()[0];
+  // const myroom = Meteor.call("rooms.getName", { id: roomid })
+  console.log(Rooms.find({}).fetch());
+  const myroom = Rooms.find({_id: roomid}).fetch()[0];
   return ({
-    user: Meteor.user() || "",
     userId: Meteor.userId() || "",
     theroom,
     myroom,

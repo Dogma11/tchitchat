@@ -8,11 +8,11 @@ import Messages from '/imports/api/messages';
 import Users from '/imports/api/users';
 import Loader from '/imports/ui/components/Loader';
 
-const ChatContent = ({ users, userId, allmessages, messages, roomid }) => {  
-    console.log(messages) 
-    console.log(users) 
+const ChatContent = ({ userids, allmessages, messages, roomid, allusers }) => {
+
     if (messages) {
         return messages.map(message => {
+            var owneruser = Users.findOne({_id: message.owner_id});
             var day = message.created_at.getDate();
             var monthIndex = message.created_at.getMonth();
             var year = message.created_at.getFullYear();
@@ -20,8 +20,8 @@ const ChatContent = ({ users, userId, allmessages, messages, roomid }) => {
                 <Comment>
                     {/* <Comment.Avatar src='/images/avatar/small/matt.jpg' /> */}
                     <Comment.Content>
-                        <Comment.Author as='a' className={ (message.user_id.includes(userId)) && 'text-warning' || '' }>
-                            {Meteor.users.findOne({_id: message.user_id[0]}).username}
+                        <Comment.Author as='a' className={ (message.user_id.includes(Meteor.userId())) && 'text-warning' || '' }>
+                            {owneruser.username}
                         </Comment.Author>
                         <Comment.Metadata>
                             {day + "/" + monthIndex + "/" + year}
@@ -36,16 +36,16 @@ const ChatContent = ({ users, userId, allmessages, messages, roomid }) => {
     }
 }
 
-export default withTracker ( ({roomid}) => {
-    console.log(roomid)
-    const allmessages = Meteor.subscribe('messages.lasts', { ids: [Meteor.userId()], roomid: roomid });
+export default withTracker ( ({roomid, userids}) => {
+    const allmessages = Meteor.subscribe('messages.lasts', { ids: userids, roomid: roomid });
     const messages = Messages.find({}).fetch();
-    const users = Users.find({}).fetch();
-    console.log(allmessages)
+    // const roomusers = Meteor.subscribe('users.getUsersOfRoom', { roomid: roomid });
+    const allusers = Meteor.subscribe('users.search');
     return {
-        userId: Meteor.userId() || '',
-        users,
+        userids,
         allmessages,
-        messages
+        messages,
+        allusers
+        // roomusers
     }
 }) (ChatContent);

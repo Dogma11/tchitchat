@@ -15,7 +15,7 @@ import Myrooms from './Myrooms';
 const Setting = ({ userId, user, alertlist }) => {
     const [ username,  setUsername  ] = useState("");
     const [ gender,    setGender    ] = useState("");
-    const [ old,       setOld       ] = useState("");
+    const [ birthdate, setBirthdate ] = useState("");
     const [ city,      setCity      ] = useState("");
     const [ email,     setEmail     ] = useState("");
     const [ roomname,  setRoomname  ] = useState("");
@@ -25,8 +25,8 @@ const Setting = ({ userId, user, alertlist }) => {
         case 'gender':
             setGender(value);
             break;
-        case 'old':
-            setOld(value);
+        case 'birthdate':
+            setBirthdate(value);
             break;
         case 'city':
             setCity(value);
@@ -41,13 +41,14 @@ const Setting = ({ userId, user, alertlist }) => {
             setRoomname(value);
             break;
         }
-    }, [ setGender, setOld, setCity, setUsername, setEmail, setRoomname ]);
+    }, [ setGender, setBirthdate, setCity, setUsername, setEmail, setRoomname ]);
 
-    const save = useCallback(( user ) => {
+    const save = useCallback((e ) => {
+        e.preventDefault();
         Meteor.call("users.update", {
                 id: userId,
                 gender: gender,
-                old: old,
+                birthdate: birthdate,
                 city: city,
                 username: username,
                 email: email
@@ -62,7 +63,7 @@ const Setting = ({ userId, user, alertlist }) => {
                 }]
             }
         }
-    }, [gender, old, city, username, email]);
+    }, [gender, birthdate, city, username, email]);
 
     return (
 
@@ -72,27 +73,28 @@ const Setting = ({ userId, user, alertlist }) => {
                     update={update}
                     state={{
                         gender,
-                        old,
+                        birthdate,
                         city,
                     }}
                 /> */}
                 <h1></h1>
+                <form onSubmit={save}>
                 <CustomInput
                     update={update}
                     type="string"
                     name="username"
                     key="username"
-                    state={{ gender, old, city, username, email, roomname }}
+                    state={{ gender, birthdate, city, username, email, roomname }}
                     label="username"
-                />
+                    />
                 <CustomInput
                     update={update}
                     type="string"
                     name="email"
                     key="email"
-                    state={{ gender, old, city, username, email, roomname }}
+                    state={{ gender, birthdate, city, username, email, roomname }}
                     label="email"
-                />
+                    />
                 <CustomSelect
                     update={update}
                     options={[
@@ -104,26 +106,27 @@ const Setting = ({ userId, user, alertlist }) => {
                     key="gender"
                     selected={gender}
                     label="gender"
-                />
+                    />
                 <CustomInput
                     update={update}
-                    type="number"
-                    name="old"
-                    key="old"
-                    state={{ gender, old, city, username, email, roomname }}
-                    label="how old ?"
-                />
+                    type="date"
+                    name="birthdate"
+                    key="birthdate"
+                    state={{ gender, birthdate, city, username, email, roomname }}
+                    label="birthdate"
+                    />
                 <CustomInput
                     update={update}
                     type="string"
                     name="city"
                     key="city"
-                    state={{ gender, old, city, username, email, roomname }}
+                    state={{ gender, birthdate, city, username, email, roomname }}
                     label="city"
-                />
+                    />
                 <Button onClick={save}>
                 Save
                 </Button>
+                </form>
                 <IsVerified userId={userId} user={user} update={update} roomname={roomname}/>
             </div>
             <Myrooms />

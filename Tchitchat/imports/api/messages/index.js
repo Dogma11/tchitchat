@@ -8,13 +8,18 @@ const MessageSchema = new SimpleSchema({
         type: [String],
     },
     room_id: {
-        type: String
+        type: String,
+        optional: true
     },
     content: {
         type: String,
     },
     created_at: {
         type: Date,
+    },
+    owner_id: {
+        type: String,
+        optional: true
     }
 });
 

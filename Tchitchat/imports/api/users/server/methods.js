@@ -5,8 +5,11 @@ import { Accounts } from 'meteor/accounts-base';
 import Users from '..';
 
 Meteor.methods({
-  "users.update"({ id, gender, old, city, username, email }) {
+  "users.update"({ id, gender, birthdate, city, username, email }) {
     if (!this.userId) {
+      throw new Meteor.Error('403', 'You must be connected');
+    }
+    if (id != this.userId) {
       throw new Meteor.Error('403', 'You must be connected');
     }
     emails = [{
@@ -18,8 +21,23 @@ Meteor.methods({
     if (user._id != id) {
       throw new Meteor.Error('403', 'Nope.');
     }
-    
-    Users.update(id, { $set: { gender, old, city, username, emails } });
+    values = {};
+    if (user.gender != gender){
+      values.gender = gender;
+    }
+    if (user.birthdate != birthdate){
+      values.birthdate = birthdate;
+    }
+    if (user.city != city){
+      values.city = city;
+    }
+    if (user.username != username && username != ""){
+      values.username = username;
+    }
+    if (user.emails != emails){
+      values.emails = emails;
+    }
+    return Users.update(id, { $set: values });
   },
   "users.sendForgot"({ email }) {
     if (!email) {

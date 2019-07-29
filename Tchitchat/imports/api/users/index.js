@@ -8,8 +8,8 @@ const UserSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    old: {
-        type: Number,
+    birthdate: {
+        type: Date,
         optional: true,
     },
     city: {

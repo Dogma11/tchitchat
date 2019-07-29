@@ -14,14 +14,14 @@ const Usertchat = ({ userids, match, theuser, targetuser }) => {
     const send = () => {
         Meteor.call("messages.create", {
             content: msg,
+            room_id: false,
             user_id: userids,
-            room_id: roomid,
+            owner_id: Meteor.userId()
         })
         setMsg("");
     }
     
     const update = useCallback((e, { name, value }) => {
-        console.log(name);
         switch(name) {
         case 'msg':
             setMsg(value);
@@ -41,7 +41,7 @@ const Usertchat = ({ userids, match, theuser, targetuser }) => {
 
             <Form className="row w-100">
             <Form.Input onChange={update} name="msg" value={msg} className="w-75" />
-            <Button className="w-25" content='Send' labelPosition='left' icon='send' primary onClick={send} />
+            <Button content='Send' labelPosition='left' icon='send' primary onClick={send} />
             </Form>
         </div>
         );
@@ -54,9 +54,8 @@ export default withTracker((component, roomid) => {
     const userid = component.match.params.id;
     const theuser = Meteor.subscribe('users.findFriend', { id: userid });
     const targetuser = Users.findOne({_id: userid});
-    console.log(userid)
     return ({
-        userids: [Meteor.userId() || "", targetuser],
+        userids: [Meteor.userId() || "", userid],
         theuser,
         targetuser
     })

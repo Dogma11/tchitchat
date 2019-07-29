@@ -11,7 +11,7 @@ const MySidebar = () => {
     <div className="mr-5"> 
       <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin' className="mysidebar">
         <RoomList />
-        <Menu.Item as='a'>
+        <Menu.Item as='a' href="/setting">
             <Icon name='plus' />
             New room
         </Menu.Item>

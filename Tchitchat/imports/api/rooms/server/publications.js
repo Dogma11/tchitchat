@@ -16,3 +16,10 @@ Meteor.publish("rooms.myroom", ({id}) => {
     return Rooms.find({_id: id})
   }
 )
+Meteor.publish("rooms.search", ({ name }) => {
+  if (!name){
+    throw new Meteor.Error('200', 'No room name !');
+  }
+  return Rooms.find({})
+}
+)

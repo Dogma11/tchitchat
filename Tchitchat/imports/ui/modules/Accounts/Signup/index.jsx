@@ -16,7 +16,7 @@ const Inscription = () => {
         setEmail(value);
         break;
       case 'password':
-        setPassword(value);n
+        setPassword(value);
         break;
       case 'username':
         setUsername(value);

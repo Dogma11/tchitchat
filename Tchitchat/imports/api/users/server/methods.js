@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
 
-Users = Meteor.users;
+import Users from '..';
 
 Meteor.methods({
   "users.update"({ id, gender, old, city, username, email }) {
@@ -14,8 +14,8 @@ Meteor.methods({
       'verified': false
     }]
     const user = Users.findOne(id);
-    console.log('userId : ' + id + ' versus this.userId : ' + this.userId);
-    if (user.userId !== this.userId) {
+    console.log('userId : ' + user._id + ' versus this.userId : ' + id);
+    if (user._id != id) {
       throw new Meteor.Error('403', 'Nope.');
     }
     
@@ -26,7 +26,8 @@ Meteor.methods({
       throw new Meteor.Error('422', 'Missing parameter');
     }
     const user = Users.findOne({ 'emails.address': email });
-    Accounts.sendResetPasswordEmail(user._id, email);
+    const id = user._id;
+    Accounts.sendResetPasswordEmail(id);
   },
   "users.verifyEmail"( { userId }) {
     console.log(userId);

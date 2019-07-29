@@ -12,38 +12,32 @@ Meteor.methods({
     });
   },
 
-  "rooms.update"({ id, title, content }) {
+  "rooms.update"({ id, name, owner_id }) {
     if (!this.userId) {
       throw new Meteor.Error('403', 'You must be connected');
     }
+    console.log("*****************************************")
+    console.log(name)
+    const room = Rooms.findOne(id);
 
-    const room = rooms.findOne(id);
-
-    if (room.userId !== this.userId) {
+    if (room.owner_id !== owner_id) {
       throw new Meteor.Error('403', 'You must be the owner of room');
     }
     
     Rooms.update(id, { $set: { name } });
   },
 
-  "rooms.remove"({ id }) {
+  "rooms.remove"({ id, owner_id  }) {
     if (!this.userId) {
       throw new Meteor.Error('403', 'You must be connected');
     }
 
-    const room = rooms.findOne(id);
+    const room = Rooms.findOne(id);
 
-    if (room.userId !== this.userId) {
+    if (room.owner_id !== owner_id) {
       throw new Meteor.Error('403', 'You must be the owner of room');
     }
 
     Rooms.remove(id);
   },
-  "rooms.findAll"({ owner_id }) {
-    if (!owner_id){
-      throw new Meteor.Error('403', 'You must be connected');
-    }
-    
-    return { rooms: Rooms.find({"owner_id": owner_id}).fetch() }
-  }
 });

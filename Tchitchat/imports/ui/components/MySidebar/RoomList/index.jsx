@@ -6,8 +6,6 @@ import { Redirect, Link } from 'react-router-dom';
 import Rooms from '/imports/api/rooms';
 
 const RoomList = ({ allroom, rooms, user, ready }) => {
-
-    console.log(ready)
     if (rooms){
         return rooms.map(room => {
             var id = room._id;

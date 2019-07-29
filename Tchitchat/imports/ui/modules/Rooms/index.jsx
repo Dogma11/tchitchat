@@ -6,7 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Rooms from '/imports/api/rooms';
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import Loader from '/imports/ui/components/Loader';
-import ChatContent from './ChatContent';
+import ChatContent from '/imports/ui/components/ChatContent';
 
 const Room = ({ user, userId, match, theroom, myroom, roomid }) => {
 
@@ -32,17 +32,17 @@ const Room = ({ user, userId, match, theroom, myroom, roomid }) => {
     
     if (myroom){
       return (
-        <div>
-          <Comment.Group>
+        <div className="mt-5 w-25">
+          <Comment.Group className="h-50 wrap">
             <Header as='h3' dividing>
               {myroom.name}
             </Header>
             <ChatContent roomid={roomid}/>
           </Comment.Group>
 
-          <Form className="row">
-            <Form.Input onChange={update} name="msg" value={msg} />
-            <Button content='Send' labelPosition='left' icon='send' primary onClick={send} />
+          <Form className="row w-100">
+            <Form.Input onChange={update} name="msg" value={msg} className="w-75" />
+            <Button className="w-25" content='Send' labelPosition='left' icon='send' primary onClick={send} />
           </Form>
         </div>
         );

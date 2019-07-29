@@ -9,6 +9,7 @@ import { Button, Link } from 'react-bootstrap';
 import Users from '/imports/api/users';
 import { withTracker } from 'meteor/react-meteor-data';
 import IsVerified from './IsVerified';
+import Myrooms from './Myrooms';
 
 // TODO: SEE https://guide.meteor.com/accounts.html#dont-use-profile doc for imp user setting
 const Setting = ({ userId, user, alertlist }) => {
@@ -43,7 +44,6 @@ const Setting = ({ userId, user, alertlist }) => {
     }, [ setGender, setOld, setCity, setUsername, setEmail, setRoomname ]);
 
     const save = useCallback(( user ) => {
-        console.log(old)
         Meteor.call("users.update", {
                 id: userId,
                 gender: gender,
@@ -66,64 +66,67 @@ const Setting = ({ userId, user, alertlist }) => {
 
     return (
 
-        <div>
-            {/* <Fields
-                update={update}
-                state={{
-                    gender,
-                    old,
-                    city,
-                }}
-            /> */}
-            <h1></h1>
-            <CustomInput
-                update={update}
-                type="string"
-                name="username"
-                key="username"
-                state={{ gender, old, city, username, email, roomname }}
-                label="username"
-            />
-            <CustomInput
-                update={update}
-                type="string"
-                name="email"
-                key="email"
-                state={{ gender, old, city, username, email, roomname }}
-                label="email"
-            />
-            <CustomSelect
-                update={update}
-                options={[
-                    {text: "Miss", value: "Miss"}, 
-                    {text: "Mister", value: "Mister"}, 
-                    {text: "Misses", value: "Misses"},
-                ]}
-                name="gender"
-                key="gender"
-                selected={gender}
-                label="gender"
-            />
-            <CustomInput
-                update={update}
-                type="number"
-                name="old"
-                key="old"
-                state={{ gender, old, city, username, email, roomname }}
-                label="how old ?"
-            />
-            <CustomInput
-                update={update}
-                type="string"
-                name="city"
-                key="city"
-                state={{ gender, old, city, username, email, roomname }}
-                label="city"
-            />
-            <Button onClick={save}>
-              Save
-            </Button>
-            <IsVerified userId={userId} user={user} update={update} roomname={roomname}/>
+        <div className="row w-75">
+            <div>
+                {/* <Fields
+                    update={update}
+                    state={{
+                        gender,
+                        old,
+                        city,
+                    }}
+                /> */}
+                <h1></h1>
+                <CustomInput
+                    update={update}
+                    type="string"
+                    name="username"
+                    key="username"
+                    state={{ gender, old, city, username, email, roomname }}
+                    label="username"
+                />
+                <CustomInput
+                    update={update}
+                    type="string"
+                    name="email"
+                    key="email"
+                    state={{ gender, old, city, username, email, roomname }}
+                    label="email"
+                />
+                <CustomSelect
+                    update={update}
+                    options={[
+                        {text: "Miss", value: "Miss"}, 
+                        {text: "Mister", value: "Mister"}, 
+                        {text: "Misses", value: "Misses"},
+                    ]}
+                    name="gender"
+                    key="gender"
+                    selected={gender}
+                    label="gender"
+                />
+                <CustomInput
+                    update={update}
+                    type="number"
+                    name="old"
+                    key="old"
+                    state={{ gender, old, city, username, email, roomname }}
+                    label="how old ?"
+                />
+                <CustomInput
+                    update={update}
+                    type="string"
+                    name="city"
+                    key="city"
+                    state={{ gender, old, city, username, email, roomname }}
+                    label="city"
+                />
+                <Button onClick={save}>
+                Save
+                </Button>
+                <IsVerified userId={userId} user={user} update={update} roomname={roomname}/>
+            </div>
+            <Myrooms />
         </div>
     );
 };

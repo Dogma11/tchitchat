@@ -5,11 +5,12 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
 import Messages from '/imports/api/messages';
-
+import Users from '/imports/api/users';
 import Loader from '/imports/ui/components/Loader';
 
-const ChatContent = ({ user, userId, allmessages, messages, roomid }) => {  
-    console.log(messages)  
+const ChatContent = ({ users, userId, allmessages, messages, roomid }) => {  
+    console.log(messages) 
+    console.log(users) 
     if (messages) {
         return messages.map(message => {
             var day = message.created_at.getDate();
@@ -19,7 +20,7 @@ const ChatContent = ({ user, userId, allmessages, messages, roomid }) => {
                 <Comment>
                     {/* <Comment.Avatar src='/images/avatar/small/matt.jpg' /> */}
                     <Comment.Content>
-                        <Comment.Author as='a'>
+                        <Comment.Author as='a' className={ (message.user_id.includes(userId)) && 'text-warning' || '' }>
                             {Meteor.users.findOne({_id: message.user_id[0]}).username}
                         </Comment.Author>
                         <Comment.Metadata>
@@ -39,9 +40,11 @@ export default withTracker ( ({roomid}) => {
     console.log(roomid)
     const allmessages = Meteor.subscribe('messages.lasts', { ids: [Meteor.userId()], roomid: roomid });
     const messages = Messages.find({}).fetch();
+    const users = Users.find({}).fetch();
+    console.log(allmessages)
     return {
-        userId: Meteor.userId() | '',
-        user: Meteor.user | '',
+        userId: Meteor.userId() || '',
+        users,
         allmessages,
         messages
     }

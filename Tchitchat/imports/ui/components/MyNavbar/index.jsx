@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
-import { NavDropdown, Navbar, Nav, Row } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
+import { NavDropdown, Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Logswitch from './Logswitch';
 import MyAlert from './MyAlert';
-const MyNavbar = ({ userId, user, alertlist }) => {
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
+
+const MyNavbar = ({ userId, user, alertlist, history }) => {
+
+    const [ searchquery, setSearchquery ] = useState("")
+
+    const update = (e) => {
+        console.log(e.target.value)    
+        setSearchquery(e.target.value)
+    }
+
+    const send = () => {
+        url = '/search/' + searchquery;
+        console.log(history.push(url))
+        return <Redirect to={ url } />
+    }
+
     return(
         <div className="head">
         <Navbar bg="dark" variant="dark">
@@ -20,6 +37,10 @@ const MyNavbar = ({ userId, user, alertlist }) => {
                 <NavDropdown.Item href="#action/3.4">Active Room</NavDropdown.Item>
             </NavDropdown>
             </Nav>
+            <Form inline className="ml-auto mr-auto">
+                <FormControl type="text" placeholder="Search for room or user" className="mr-sm-2" onChange={update} />
+                <Button variant="outline-info" onClick={send}>Search</Button>
+            </Form>
             <Logswitch/>
         </Navbar.Collapse>
         </Navbar>
@@ -28,4 +49,4 @@ const MyNavbar = ({ userId, user, alertlist }) => {
     );
 };
 
-export default MyNavbar;
+export default withRouter(MyNavbar);

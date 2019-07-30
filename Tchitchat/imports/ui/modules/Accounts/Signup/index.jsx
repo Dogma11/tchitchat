@@ -10,6 +10,7 @@ const Inscription = () => {
   const [ username, setUsername ] = useState("");
 
   const update = useCallback((e, { name, value }) => {
+    console.log(name);
     switch(name) {
       case 'email':
         setEmail(value);
@@ -35,11 +36,7 @@ const Inscription = () => {
       <h1>Inscription</h1>
       <Fields
         update={update}
-        state={{
-          password,
-          username,
-          email,
-        }}
+        state={{ password, username, email }}
       />
       <button
         onClick={signup}

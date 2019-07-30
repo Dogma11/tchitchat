@@ -1,4 +1,25 @@
 body {
-  padding: 10px;
   font-family: sans-serif;
+  background-color: lightslategrey !important;
+}
+.mysidebar {
+  position: sticky !important;
+  min-height: -webkit-fill-available;
+}
+.wrap {
+  overflow: auto;
+}
+.top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.room-list {
+  overflow: auto;
+  font-size: 22px;
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -4,26 +4,27 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 const Users = Meteor.users;
 
 const UserSchema = new SimpleSchema({
-    username: {
-        type: [String],
-    },
-    email: {
-        type: String
-    },
     gender: {
-        type: String
+        type: String,
+        optional: true,
     },
     birthdate: {
-        type: Date
+        type: Date,
+        optional: true,
     },
     city: {
-        type: String
+        type: String,
+        optional: true
     },
     created_at: {
-        type: Date
-    }
+        type: Date,
+        defaultValue: new Date,
+    },
+    username: { type: String, label: "Username" },
+    services: { type: Object, blackbox: true },
+    emails: { type: [Object], optional: true, blackbox: true },
+    profile: { type: Object, blackbox: true, optional: true },
 });
-
 
 Users.attachSchema(UserSchema)
 

@@ -2,16 +2,18 @@ import { Meteor } from 'meteor/meteor';
 import Messages from '..';
 
 Meteor.methods({
-  "messages.create"({ user_id, room_id, content }) {
+  "messages.create"({ user_id, room_id, content, owner_id }) {
     if (!this.userId) {
       throw new Meteor.Error('403', 'You must be connected');
     }
+    console.log(room_id)
     if (room_id) {
         Messages.insert({
-            user_id: [this.user_id],
+            user_id: user_id,
             room_id: room_id,
             content: content,
-            created_at: new Date
+            owner_id: owner_id,
+            created_at: new Date()
         });
     }
     else
@@ -19,7 +21,8 @@ Meteor.methods({
         Messages.insert({
             user_id: user_id,
             content: content,
-            created_at: new Date
+            owner_id: owner_id,
+            created_at: new Date()
         });
     }
   },

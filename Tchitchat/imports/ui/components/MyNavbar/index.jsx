@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Link, Redirect } from 'react-router-dom';
 import { NavDropdown, Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import Logswitch from './Logswitch';
+import Logswitch from './logswitch';
 import MyAlert from './MyAlert';
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
